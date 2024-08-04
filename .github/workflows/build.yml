@@ -38,7 +38,7 @@ jobs:
           # 要包含到Release Assets中的文件
         artifacts: "*.apk"
           # 会使用一个临时的token来创建Release
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
           # 自动生成一些变化列表之类的内容。
         generateReleaseNotes: true
 
