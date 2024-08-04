@@ -35,8 +35,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew --no-daemon clean assembleDebug testDebug
     - uses: actions/upload-artifact@v2
-        with:
-          name: upload-apk
-          path: |
-            ${{github.workspace}}/app/build/outputs/apk/tencent/release/*.apk
-            ${{github.workspace}}/app/build/outputs/apk/xiaomi/release/*.apk
+      with:
+        name: upload-apk
+        path: |
+          ${{github.workspace}}/app/build/outputs/apk/tencent/release/*.apk
+          ${{github.workspace}}/app/build/outputs/apk/xiaomi/release/*.apk
