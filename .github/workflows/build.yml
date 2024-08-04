@@ -33,10 +33,13 @@ jobs:
         java-version: 11
     - name: Build with Gradle
       run: ./gradlew --no-daemon clean assembleDebug testDebug
-
-    - uses: actions/upload-artifact@v2
+    - uses: ncipollo/release-action@v1
       with:
-        name: Signed app bundle
-        path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          # 要包含到Release Assets中的文件
+        artifacts: "*.apk"
+          # 会使用一个临时的token来创建Release
+        GITHUB_TOKEN: ${{ github.GITHUB_TOKEN }}
+          # 自动生成一些变化列表之类的内容。
+        generateReleaseNotes: true
 
     
