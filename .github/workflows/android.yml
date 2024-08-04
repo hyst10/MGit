@@ -83,30 +83,8 @@ jobs:
           # 要包含到Release Assets中的文件
           artifacts: "*.apk"
           # 会使用一个临时的token来创建Release
-          token: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.GITHUB_TOKEN }}
           # 自动生成一些变化列表之类的内容。
           generateReleaseNotes: true
 
-  # 增加个notice的job，在打包完成后发邮件通知
-  notice:
-    runs-on: ubuntu-latest
-
-    # 依赖于build
-    needs: builds
-
-    # 操作步骤
-    steps:
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          # 邮箱配置，密码是SMTP服务的授权密码
-          server_address: smtp.qq.com
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-
-          # 邮件内容
-          subject: Github Actions job result
-          from: ${{secrets.MAIL_USERNAME}}
-          to: ${{secrets.MAIL_TOUSERNAME}}
-          body: Build job of ${{github.repository}} completed successfully!
+  
